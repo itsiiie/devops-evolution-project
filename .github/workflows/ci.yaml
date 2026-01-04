@@ -1,48 +1,40 @@
-name: CI - Backend Docker Build & Health Check
+name: CD - Deploy to EC2
 
 on:
   push:
     branches:
-      - develop
-      - main
-  pull_request:
-    branches:
       - main
 
 jobs:
-  backend-ci:
-    name: Backend CI
+  deploy:
+    name: Deploy to EC2
     runs-on: ubuntu-latest
 
     steps:
-      # 1️⃣ Checkout code
       - name: Checkout repository
         uses: actions/checkout@v4
 
-      # 2️⃣ Set up Docker
-      - name: Set up Docker
-        uses: docker/setup-buildx-action@v3
+      - name: Deploy via SSH
+        uses: appleboy/ssh-action@v1.0.3
+        with:
+          host: ${{ secrets.EC2_HOST }}
+          username: ${{ secrets.EC2_USER }}
+          key: ${{ secrets.EC2_SSH_KEY }}
+          script: |
+            set -e
+            cd devops-evolution-project
+            git checkout main
+            git pull origin main
 
-      # 3️⃣ Build Docker image
-      - name: Build backend Docker image
-        run: |
-          docker build -t devops-backend:ci ./app
+            cd app
+            docker build -t devops-backend:latest .
 
-      # 4️⃣ Run container
-      - name: Run backend container
-        run: |
-          docker run -d \
-            -p 5000:5000 \
-            -e APP_ENV=ci \
-            -e APP_VERSION=ci-build \
-            -e DB_HOST=localhost \
-            devops-backend:ci
+            docker stop devops-backend || true
+            docker rm devops-backend || true
 
-      # 5️⃣ Wait for app to start
-      - name: Wait for backend to start
-        run: sleep 5
-
-      # 6️⃣ Health check
-      - name: Health check
-        run: |
-          curl -f http://localhost:5000/health
+            docker run -d \
+              --name devops-backend \
+              -p 5000:5000 \
+              -e APP_ENV=production \
+              -e APP_VERSION=main-latest \
+              devops-backend:latest
