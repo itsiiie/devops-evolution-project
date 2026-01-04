@@ -1,22 +1,21 @@
-# Version 1 – EC2 Deployment
+# Version 1 – AWS EC2 Deployment
 
 ## Overview
 
-Deployed Dockerized Flask backend to AWS EC2.
+Deployment of the Dockerized backend to AWS EC2.
 
 ## Infrastructure
 
-- Ubuntu 22.04
+- Ubuntu 22.04 EC2 instance
 - Docker runtime
-- Public EC2 instance
+- Security groups for SSH and application access
 
-## DevOps Concepts
+## Deployment Strategy
 
-- Cloud VM provisioning
-- Container runtime on EC2
-- Environment-based config
-- Port exposure & security groups
+- Manual deployment for learning clarity
+- Environment variables control production behavior
+- Docker used as the runtime
 
 ## Outcome
 
-Backend accessible via public IP.
+Application accessible via EC2 public IP.

@@ -1,21 +1,21 @@
 # Version 1 – Docker & Docker Compose
 
-## Overview
+## Purpose
 
-Containerized the backend and database using Docker Compose.
+Provide a reproducible local environment using containers.
 
 ## Services
 
 - Backend (Flask)
 - PostgreSQL 15
 
-## DevOps Concepts
+## Key Concepts
 
 - Service discovery via Docker DNS
-- Environment-based configuration
-- Persistent volumes
-- Reproducible environments
+- Environment variable injection
+- Persistent volumes for database storage
 
 ## Outcome
 
-Entire system runs with a single command.
+Entire system can be started with:
+docker compose up

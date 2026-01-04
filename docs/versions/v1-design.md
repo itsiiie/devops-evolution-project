@@ -1,29 +1,25 @@
-# Version 1 – 2-Tier Architecture Design
+# Version 1 – Architecture Design (2-Tier)
 
-## Overview
+## Goal
 
-Version 1 implements a simple 2-tier architecture:
+Establish DevOps foundations using a minimal but realistic 2-tier system.
+
+## Architecture
 
 - Backend API (Flask)
-- PostgreSQL Database
+- Database (PostgreSQL)
+
+No frontend is included in Version 1 to keep focus on infrastructure, CI/CD, and deployment.
 
 ## DevOps Focus
 
 - Environment-driven configuration
-- Container-ready design
-- CI/CD compatibility
-- Deployment on AWS EC2
-
-## Endpoints
-
-- /health
-- /version
-- /items
-
-## Environment Variables
-
-Defined externally to support multiple environments.
+- Container-first mindset
+- CI before CD
+- Cloud deployment using EC2
 
 ## Why 2-Tier?
 
-Chosen to master DevOps fundamentals before scaling complexity.
+- Reduces complexity
+- Enables focus on DevOps fundamentals
+- Mirrors many internal enterprise services
