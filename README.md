@@ -25,4 +25,4 @@ This repository documents a hands-on DevOps learning journey where a simple appl
 ## Versions
 
 - v1.0 – 2-tier application with Docker, CI/CD, and EC2 deployment
-- v2.0 – 3-tier architecture (upcoming)
+- v2.0 – 3-tier architecture (upcoming).
